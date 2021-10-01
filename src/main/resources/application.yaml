@@ -1,0 +1,63 @@
+#============== netty config =====================================
+
+server:
+  address: localhost
+  port: "8080"
+
+#============== logging ==========================================
+
+logging:
+  level: info
+
+#============== spring boot admin web server config and JPA config ==============
+
+spring:
+  boot:
+    admin:
+      client:
+        url: http://192.168.206.146:9080/
+        username: admin
+        password: 1245
+        instance:
+          management-url: http://192.168.206.146:8086/actuator
+          health-url: http://192.168.206.146:8086/actuator/health
+          service-url: http://192.168.206.146:8086/
+  application:
+    name: CDCService
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+
+
+#============== spring actuator config ==========================
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: auditevents, beans, caches, conditions, configprops, env, flyway, health, httptrace, info, prometheus
+  endpoint:
+    health:
+      enabled: true
+      show-details: always
+  metrics:
+    export:
+      prometheus:
+        enabled: true
+    distribution:
+      percentiles-histogram:
+        "[http.server.requests]": true
+
+#============== spring hibernate & JPA config ==========================
+
+
+#============== spring source ms sql NSI datasource ==========================
+NSI:
+  datasource:
+    hikari:
+      pool-name: NSIDataSource
+      username: kobra_main
+      password: Ggv123
+      jdbc-url: jdbc:sqlserver://srvr153;databaseName=NSI
+      driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
