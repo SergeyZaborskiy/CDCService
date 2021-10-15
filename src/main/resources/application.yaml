@@ -1,16 +1,12 @@
 #============== netty config =====================================
-
 server:
-  address: localhost
-  port: "8080"
+  address: 192.168.206.146
+  port: "8092"
 
 #============== logging ==========================================
 
-logging:
-  level: info
 
 #============== spring boot admin web server config and JPA config ==============
-
 spring:
   boot:
     admin:
@@ -19,19 +15,18 @@ spring:
         username: admin
         password: 1245
         instance:
-          management-url: http://192.168.206.146:8086/actuator
-          health-url: http://192.168.206.146:8086/actuator/health
-          service-url: http://192.168.206.146:8086/
+          management-url: http://192.168.206.146:8092/actuator
+          health-url: http://192.168.206.146:8092/actuator/health
+          service-url: http://192.168.206.146:8092/
   application:
     name: CDCService
   jpa:
+    show-sql: true
     hibernate:
       ddl-auto: none
-    show-sql: true
 
 
 #============== spring actuator config ==========================
-
 management:
   endpoints:
     web:
@@ -44,20 +39,37 @@ management:
   metrics:
     export:
       prometheus:
-        enabled: true
+        enabled: false
+      graphite:
+        enabled: false
     distribution:
       percentiles-histogram:
-        "[http.server.requests]": true
+        "[http.server.requests]": false
 
 #============== spring hibernate & JPA config ==========================
 
 
 #============== spring source ms sql NSI datasource ==========================
-NSI:
-  datasource:
-    hikari:
-      pool-name: NSIDataSource
-      username: kobra_main
-      password: Ggv123
-      jdbc-url: jdbc:sqlserver://srvr153;databaseName=NSI
-      driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+nsi:
+  spring:
+    datasource:
+        pool-name: nsiDataSource
+        username: kobra_main
+        password: Ggv123
+        url: jdbc:sqlserver://srvr153;databaseName=NSI
+        jdbc-url: jdbc:sqlserver://srvr153;databaseName=NSI
+        driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+        properties:
+          dialect: org.hibernate.dialect.SQLServerDialect
+          ddl-auto: none
+
+#============== spring source postgre UFD datasource ==========================
+ufd:
+  spring:
+    datasource:
+        pool-name: ufdDataSource
+        username: sa
+        password: Gf07031990
+        url: jdbc:postgresql://localhost:5432/ufd
+        jdbc-url: jdbc:postgresql://localhost:5432/ufd
+        driver-class-name: org.postgresql.Driver

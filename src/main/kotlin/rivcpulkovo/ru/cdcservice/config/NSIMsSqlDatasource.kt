@@ -7,27 +7,40 @@ import org.springframework.boot.jdbc.DataSourceBuilder
 import org.springframework.boot.orm.jpa.EntityManagerFactoryBuilder
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
+import org.springframework.context.annotation.Primary
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories
 import org.springframework.orm.jpa.JpaTransactionManager
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean
 import org.springframework.transaction.PlatformTransactionManager
 import org.springframework.transaction.annotation.EnableTransactionManagement
-import rivcpulkovo.ru.cdcservice.entity.mssql.*
+import rivcpulkovo.ru.cdcservice.domain.entity.mssql.*
 import javax.persistence.EntityManagerFactory
 
 @Configuration
 @EnableTransactionManagement
+@EnableJpaRepositories(
+    basePackages = ["rivcpulkovo.ru.cdcservice.domain.repository.mssql"],
+    entityManagerFactoryRef = "nsiEntityManager", transactionManagerRef = "nsiTransactionManager"
+)
 class NSIMsSqlDatasource {
 
     @Bean
-    @ConfigurationProperties(prefix = "spring.datasource")
-    fun mssqlDataSource(): HikariDataSource {
+    @ConfigurationProperties(prefix = "nsi.spring.datasource")
+    fun nsiHikariDataSource(): HikariDataSource {
         return DataSourceBuilder.create().type(HikariDataSource::class.java).build()
     }
 
-    @Bean(name = ["mssqlEntityManager"])
+    @Bean(name = ["nsiEntityManager"])
     fun mysqlEntityManagerFactory(builder: EntityManagerFactoryBuilder): LocalContainerEntityManagerFactoryBean {
+
+        val hibernateProps: Map<String, String> = mapOf(
+            "hibernate.dialect" to "org.hibernate.dialect.SQLServerDialect",
+            "hibernate.ddl-auto" to "none"
+        )
+
         return builder
-            .dataSource(mssqlDataSource())
+            .dataSource(nsiHikariDataSource())
+            .properties(hibernateProps)
             .packages(MsSqlAirport::class.java)
             .packages(MsSqlAirctaftType::class.java)
             .packages(MsSqlAirctaftTypeId::class.java)
@@ -36,13 +49,13 @@ class NSIMsSqlDatasource {
             .packages(MsSqlCity::class.java)
             .packages(MsSqlCountry::class.java)
             .packages(MsSqlTimezone::class.java)
-            .persistenceUnit("mssqlPU")
+            .persistenceUnit("nsiPU")
             .build()
     }
 
-    @Bean(name = ["mssqlTransactionManager"])
-    fun mssqlTransactionManager(@Qualifier("mssqlEntityManager") entityManagerFactory: EntityManagerFactory): PlatformTransactionManager {
+    @Bean(name = ["nsiTransactionManager"])
+    @Primary
+    fun mssqlTransactionManager(@Qualifier("nsiEntityManager") entityManagerFactory: EntityManagerFactory): PlatformTransactionManager {
         return JpaTransactionManager(entityManagerFactory)
     }
-
 }
