@@ -2,7 +2,7 @@ package rivcpulkovo.ru.cdcservice.domain.entity.mssql
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import org.hibernate.annotations.Proxy
-import java.time.Instant
+import java.time.LocalDateTime
 import javax.persistence.*
 
 @Table(name = "ComplianceCodesTraffic")
@@ -13,7 +13,7 @@ open class MsSqlComplianceCodesTraffic {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
-    open var id: Int? = null
+    open var id: Int = 0
 
     @Column(name = "RU", nullable = false, length = 1)
     open var ru: String? = null
@@ -31,5 +31,6 @@ open class MsSqlComplianceCodesTraffic {
     open var cop: Int? = null
 
     @Column(name = "dk", nullable = false)
-    open var dk: Instant? = null
+    open var dk: LocalDateTime? = null
+
 }

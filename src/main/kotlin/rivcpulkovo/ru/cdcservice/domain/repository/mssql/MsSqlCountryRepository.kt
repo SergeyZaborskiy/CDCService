@@ -6,4 +6,6 @@ import rivcpulkovo.ru.cdcservice.domain.entity.mssql.MsSqlCountry
 
 @Repository
 interface MsSqlCountryRepository : JpaRepository<MsSqlCountry, String> {
+
+    override fun getById(id: String): MsSqlCountry
 }

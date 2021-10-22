@@ -1,0 +1,126 @@
+package rivcpulkovo.ru.cdcservice.domain.entity.postgresql.nsi.public_schema
+
+import rivcpulkovo.ru.cdcservice.domain.entity.mssql.MsSqlAirport
+import java.math.BigDecimal
+import java.time.LocalDateTime
+import javax.persistence.*
+
+@Entity
+@Table(name = "airports", schema = "public", catalog = "nsi")
+open class Airport {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false)
+    open var id: Int? = null
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "country_id", nullable = false, insertable = false, updatable =false)
+    open var country: Country? = null
+
+    @Column(name = "country_id")
+    open var countryId: Int? = null
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "city_id", nullable = false, insertable = false, updatable =false)
+    open var city: City? = null
+
+    @Column(name = "city_id")
+    open var cityId: Int? = null
+
+    @Column(name = "inner_id", nullable = false)
+    open var innerId: Int? = null
+
+    @Column(name = "iata", nullable = false, length = 3)
+    open var iata: String? = null
+
+    @Column(name = "native", nullable = false, length = 3)
+    open var native: String? = null
+
+    @Column(name = "icao", nullable = false, length = 4)
+    open var icao: String? = null
+
+    @Column(name = "native_icao", nullable = false, length = 4)
+    open var nativeIcao: String? = null
+
+    @Column(name = "military", nullable = false, length = 4)
+    open var military: String? = null
+
+    @Column(name = "native_military", nullable = false, length = 4)
+    open var nativeMilitary: String? = null
+
+    @Column(name = "short_name", nullable = false, length = 10)
+    open var shortName: String? = null
+
+    @Column(name = "full_name", nullable = false, length = 1000)
+    open var fullName: String? = null
+
+    @Column(name = "latitude", nullable = false, precision = 131089)
+    open var latitude: BigDecimal? = null
+
+    @Column(name = "longitude", nullable = false, precision = 131089)
+    open var longitude: BigDecimal? = null
+
+    @Column(name = "start_date", nullable = false)
+    open var startDate: LocalDateTime? = null
+
+    @Column(name = "end_date", nullable = false)
+    open var endDate: LocalDateTime? = null
+
+    @Column(name = "creation_date", nullable = false)
+    open var creationDate: LocalDateTime? = null
+
+    @Column(name = "correction_date")
+    open var correctionDate: LocalDateTime? = null
+
+    @Column(name = "editor_id", nullable = false)
+    open var editorId: Int? = null
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "time_zone_inner_id", nullable = false, insertable = false, updatable =false)
+    open var timeZoneInner: TimeZone? = null
+
+    @Column(name = "time_zone_inner_id")
+    open var timeZoneInnerId: Int? = null
+
+
+    constructor(data: MsSqlAirport) {
+        this.innerId = data.id
+        this.iata = data.iata ?: "нд"
+        this.native = data.ap ?: "нд"
+        this.icao = data.ik ?: "нд"
+        this.nativeIcao = data.ikR ?: "нд"
+        this.military = data.milm ?: "нд"
+        this.nativeMilitary = data.mil ?: "нд"
+        this.shortName = data.name8 ?: "нд"
+        this.fullName = data.nameAp ?: "нд"
+        this.latitude = coordinatesToBigDecimal(data.lat) ?: 0.0.toBigDecimal()
+        this.longitude = coordinatesToBigDecimal(data._long) ?: 0.0.toBigDecimal()
+        this.startDate = data.ds ?: LocalDateTime.now()
+        this.endDate = LocalDateTime.now().plusYears(10)
+        this.creationDate = null ?: LocalDateTime.now()
+        this.correctionDate = LocalDateTime.now()
+        this.editorId = 0
+        this.timeZoneInnerId = data.tz?.toIntOrNull()?: 0
+        this.countryId = 0
+        this.cityId = data.idCity?.id ?: 0
+
+    }
+
+    private fun coordinatesToBigDecimal(coordinate: String?): BigDecimal? {
+        val direction: String? = coordinate?.substring(0, 1)
+        var directionInt = 1
+        var hours: Int?
+        var minutes: Double?
+        if (direction == "S" || direction == "W") {
+            directionInt = -1
+        }
+        if (direction == "W" || direction == "E") {
+            hours = coordinate?.substring(1, 4)?.toInt()
+            minutes = (coordinate?.substring(4)?.toDouble())?.div(60)
+        } else {
+            hours = coordinate?.substring(1, 3)?.toInt()
+            minutes = (coordinate?.substring(3)?.toDouble())?.div(60)
+        }
+        return (hours?.plus(minutes!!))?.times(directionInt)?.toBigDecimal()
+    }
+}

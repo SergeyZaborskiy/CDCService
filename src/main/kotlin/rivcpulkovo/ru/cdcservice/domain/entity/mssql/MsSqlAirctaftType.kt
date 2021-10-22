@@ -3,7 +3,7 @@ package rivcpulkovo.ru.cdcservice.domain.entity.mssql
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import org.hibernate.annotations.Proxy
 import java.math.BigDecimal
-import java.time.Instant
+import java.time.LocalDateTime
 import javax.persistence.*
 
 @Table(
@@ -143,7 +143,7 @@ open class MsSqlAirctaftType {
     open var ts4: String? = null
 
     @Column(name = "DK", nullable = false)
-    open var dk: Instant? = null
+    open var dk: LocalDateTime? = null
 
     @Column(name = "NAME3", nullable = false, precision = 3)
     open var name3: BigDecimal? = null

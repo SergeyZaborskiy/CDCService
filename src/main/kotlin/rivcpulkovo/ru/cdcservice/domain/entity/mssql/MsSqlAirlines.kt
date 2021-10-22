@@ -2,7 +2,7 @@ package rivcpulkovo.ru.cdcservice.domain.entity.mssql
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import org.hibernate.annotations.Proxy
-import java.time.Instant
+import java.time.LocalDateTime
 import javax.persistence.*
 
 @Table(
@@ -69,16 +69,16 @@ open class MsSqlAirlines {
     open var cc: String? = null
 
     @Column(name = "DV", nullable = false)
-    open var dv: Instant? = null
+    open var dv: LocalDateTime? = null
 
     @Column(name = "do")
-    open var _do: Instant? = null
+    open var _do: LocalDateTime? = null
 
     @Column(name = "ds", nullable = false)
-    open var ds: Instant? = null
+    open var ds: LocalDateTime? = null
 
     @Column(name = "dk", nullable = false)
-    open var dk: Instant? = null
+    open var dk: LocalDateTime? = null
 
     @Column(name = "REM", nullable = false, length = 300)
     open var rem: String? = null

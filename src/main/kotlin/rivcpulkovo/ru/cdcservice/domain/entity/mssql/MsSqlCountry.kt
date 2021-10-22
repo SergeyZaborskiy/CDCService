@@ -2,7 +2,7 @@ package rivcpulkovo.ru.cdcservice.domain.entity.mssql
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import org.hibernate.annotations.Proxy
-import java.time.Instant
+import java.time.LocalDateTime
 import javax.persistence.Column
 import javax.persistence.Entity
 import javax.persistence.Id
@@ -48,7 +48,7 @@ open class MsSqlCountry {
     open var aci: Char? = null
 
     @Column(name = "dk", nullable = false)
-    open var dk: Instant? = null
+    open var dk: LocalDateTime? = null
 
     @Column(name = "cop", nullable = false)
     open var cop: Int? = null

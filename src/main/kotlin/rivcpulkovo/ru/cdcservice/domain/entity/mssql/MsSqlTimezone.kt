@@ -3,7 +3,7 @@ package rivcpulkovo.ru.cdcservice.domain.entity.mssql
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import org.hibernate.annotations.Proxy
 import java.math.BigDecimal
-import java.time.Instant
+import java.time.LocalDateTime
 import javax.persistence.*
 
 @Table(
@@ -19,14 +19,17 @@ open class MsSqlTimezone {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
-    open var id: Int? = null
+    open var id: Int = 0
 
     @ManyToOne(optional = false)
-    @JoinColumn(name = "cc", nullable = false)
-    open var cc: MsSqlCountry? = null
+    @JoinColumn(name = "cc", nullable = false, insertable = false, updatable = false)
+    open var country: MsSqlCountry? = null
+
+    @Column(name = "cc", nullable = false)
+    open var cc: String = "AA"
 
     @Column(name = "TZ", nullable = false, length = 2)
-    open var tz: String? = null
+    open var tz: String = ""
 
     @Column(name = "STAND_VAR", nullable = false, precision = 6, scale = 2)
     open var standVar: BigDecimal? = null
@@ -35,13 +38,13 @@ open class MsSqlTimezone {
     open var utcTs: String? = null
 
     @Column(name = "UTC_DS")
-    open var utcDs: Instant? = null
+    open var utcDs: LocalDateTime? = null
 
     @Column(name = "UTC_TE", nullable = false, length = 4)
     open var utcTe: String? = null
 
     @Column(name = "UTC_DE")
-    open var utcDe: Instant? = null
+    open var utcDe: LocalDateTime? = null
 
     @Column(name = "DST_VAR", nullable = false, precision = 6, scale = 2)
     open var dstVar: BigDecimal? = null
@@ -50,16 +53,16 @@ open class MsSqlTimezone {
     open var locTs: String? = null
 
     @Column(name = "LOC_DS")
-    open var locDs: Instant? = null
+    open var locDs: LocalDateTime? = null
 
     @Column(name = "LOC_TE", nullable = false, length = 4)
     open var locTe: String? = null
 
     @Column(name = "LOC_DE")
-    open var locDe: Instant? = null
+    open var locDe: LocalDateTime? = null
 
     @Column(name = "dk", nullable = false)
-    open var dk: Instant? = null
+    open var dk: LocalDateTime? = null
 
     @Column(name = "cop", nullable = false)
     open var cop: Int? = null

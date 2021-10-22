@@ -2,38 +2,39 @@
 <project version="4">
   <component name="PersistenceUnitSettings">
     <persistence-units>
-      <persistence-unit name="ufdPU">
-        <entities>
-          <entity value="rivcpulkovo.ru.cdcservice.domain.entity.postgresql.public_schema.Airline" />
-          <entity value="rivcpulkovo.ru.cdcservice.domain.entity.postgresql.public_schema.AircraftType" />
-          <entity value="rivcpulkovo.ru.cdcservice.domain.entity.postgresql.public_schema.Airport" />
-          <entity value="rivcpulkovo.ru.cdcservice.domain.entity.postgresql.public_schema.AlternateType" />
-          <entity value="rivcpulkovo.ru.cdcservice.domain.entity.postgresql.public_schema.BookingClass" />
-          <entity value="rivcpulkovo.ru.cdcservice.domain.entity.postgresql.public_schema.City" />
-          <entity value="rivcpulkovo.ru.cdcservice.domain.entity.postgresql.public_schema.ComplianceCode" />
-          <entity value="rivcpulkovo.ru.cdcservice.domain.entity.postgresql.public_schema.Country" />
-          <entity value="rivcpulkovo.ru.cdcservice.domain.entity.postgresql.public_schema.DelayReason" />
-          <entity value="rivcpulkovo.ru.cdcservice.domain.entity.postgresql.public_schema.EtopsType" />
-          <entity value="rivcpulkovo.ru.cdcservice.domain.entity.postgresql.public_schema.Language" />
-          <entity value="rivcpulkovo.ru.cdcservice.domain.entity.postgresql.public_schema.MessageType" />
-          <entity value="rivcpulkovo.ru.cdcservice.domain.entity.postgresql.public_schema.NavCalcType" />
-          <entity value="rivcpulkovo.ru.cdcservice.domain.entity.postgresql.public_schema.PortTaxiTime" />
-          <entity value="rivcpulkovo.ru.cdcservice.domain.entity.postgresql.public_schema.RouteType" />
-          <entity value="rivcpulkovo.ru.cdcservice.domain.entity.postgresql.public_schema.SsrType" />
-          <entity value="rivcpulkovo.ru.cdcservice.domain.entity.postgresql.public_schema.TimeZone" />
-          <entity value="rivcpulkovo.ru.cdcservice.domain.entity.postgresql.public_schema.WaypointType" />
-        </entities>
-      </persistence-unit>
-      <persistence-unit name="nsiPU">
+      <persistence-unit name="nsiMsPU">
         <entities>
           <entity value="rivcpulkovo.ru.cdcservice.domain.entity.mssql.MsSqlAirport" />
-          <entity value="rivcpulkovo.ru.cdcservice.domain.entity.mssql.MsSqlCountry" />
           <entity value="rivcpulkovo.ru.cdcservice.domain.entity.mssql.MsSqlCity" />
+          <entity value="rivcpulkovo.ru.cdcservice.domain.entity.mssql.MsSqlCountry" />
           <entity value="rivcpulkovo.ru.cdcservice.domain.entity.mssql.MsSqlAirctaftType" />
           <entity value="rivcpulkovo.ru.cdcservice.domain.entity.mssql.MsSqlAirlines" />
           <entity value="rivcpulkovo.ru.cdcservice.domain.entity.mssql.MsSqlTimezone" />
           <entity value="rivcpulkovo.ru.cdcservice.domain.entity.mssql.MsSqlComplianceCodesTraffic" />
           <entity value="rivcpulkovo.ru.cdcservice.domain.entity.mssql.MsSqlAirctaftTypeId" />
+          <entity value="rivcpulkovo.ru.cdcservice.domain.entity.mssql.MsSqlCityOld" />
+        </entities>
+      </persistence-unit>
+      <persistence-unit name="nsiPgPU">
+        <entities>
+          <entity value="rivcpulkovo.ru.cdcservice.domain.entity.postgresql.nsi.public_schema.Airport" />
+          <entity value="rivcpulkovo.ru.cdcservice.domain.entity.postgresql.nsi.public_schema.Country" />
+          <entity value="rivcpulkovo.ru.cdcservice.domain.entity.postgresql.nsi.public_schema.TimeZone" />
+          <entity value="rivcpulkovo.ru.cdcservice.domain.entity.postgresql.nsi.public_schema.City" />
+          <entity value="rivcpulkovo.ru.cdcservice.domain.entity.postgresql.nsi.public_schema.Language" />
+          <entity value="rivcpulkovo.ru.cdcservice.domain.entity.postgresql.nsi.public_schema.AircraftType" />
+          <entity value="rivcpulkovo.ru.cdcservice.domain.entity.postgresql.nsi.public_schema.ComplianceCode" />
+          <entity value="rivcpulkovo.ru.cdcservice.domain.entity.postgresql.nsi.public_schema.Airline" />
+          <entity value="rivcpulkovo.ru.cdcservice.domain.entity.postgresql.nsi.public_schema.AlternateType" />
+          <entity value="rivcpulkovo.ru.cdcservice.domain.entity.postgresql.nsi.public_schema.BookingClass" />
+          <entity value="rivcpulkovo.ru.cdcservice.domain.entity.postgresql.nsi.public_schema.DelayReason" />
+          <entity value="rivcpulkovo.ru.cdcservice.domain.entity.postgresql.nsi.public_schema.EtopsType" />
+          <entity value="rivcpulkovo.ru.cdcservice.domain.entity.postgresql.nsi.public_schema.MessageType" />
+          <entity value="rivcpulkovo.ru.cdcservice.domain.entity.postgresql.nsi.public_schema.NavCalcType" />
+          <entity value="rivcpulkovo.ru.cdcservice.domain.entity.postgresql.nsi.public_schema.PortTaxiTime" />
+          <entity value="rivcpulkovo.ru.cdcservice.domain.entity.postgresql.nsi.public_schema.RouteType" />
+          <entity value="rivcpulkovo.ru.cdcservice.domain.entity.postgresql.nsi.public_schema.SsrType" />
+          <entity value="rivcpulkovo.ru.cdcservice.domain.entity.postgresql.nsi.public_schema.WaypointType" />
         </entities>
       </persistence-unit>
     </persistence-units>

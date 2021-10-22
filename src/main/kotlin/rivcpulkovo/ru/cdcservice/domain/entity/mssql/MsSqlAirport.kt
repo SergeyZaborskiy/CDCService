@@ -2,7 +2,7 @@ package rivcpulkovo.ru.cdcservice.domain.entity.mssql
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import org.hibernate.annotations.Proxy
-import java.time.Instant
+import java.time.LocalDateTime
 import javax.persistence.*
 
 @Table(
@@ -67,10 +67,10 @@ open class MsSqlAirport {
     open var tz: String? = null
 
     @Column(name = "ds", nullable = false)
-    open var ds: Instant? = null
+    open var ds: LocalDateTime? = null
 
     @Column(name = "dk", nullable = false)
-    open var dk: Instant? = null
+    open var dk: LocalDateTime? = null
 
     @Column(name = "REM", nullable = false, length = 25)
     open var rem: String? = null
