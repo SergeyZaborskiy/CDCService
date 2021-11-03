@@ -7,6 +7,10 @@ import rivcpulkovo.ru.cdcservice.domain.entity.postgresql.nsi.public_schema.Airp
 @Repository
 interface AirportRepository : JpaRepository<Airport, Int> {
 
-    fun existsAirportByInnerId (innerId: Int?) : Boolean
+    fun existsByInnerId (innerId: Int?) : Boolean
+
+    fun findByCityId(cityId: Int): List<Airport>
+
+    fun findByCountryId(countryId: Int): List<Airport>
 
 }

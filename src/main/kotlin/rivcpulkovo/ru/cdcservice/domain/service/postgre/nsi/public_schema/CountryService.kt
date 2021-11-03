@@ -29,7 +29,7 @@ class CountryService(private val repository: CountryRepository) {
         return if (repository.existsByAlpha2(country.id)) {
             "Already have one"
         } else {
-            val temp: Country = Country(country)
+            val temp: Country = Country(country, 1)
             repository.save(temp)
             "Save done"
         }
@@ -40,7 +40,7 @@ class CountryService(private val repository: CountryRepository) {
             if (repository.existsByAlpha2(country.id)) {
                 continue
             } else {
-                val temp: Country = Country(country)
+                val temp: Country = Country(country, 1)
                 repository.save(temp)
             }
         }

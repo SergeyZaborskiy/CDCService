@@ -1,9 +1,11 @@
 package rivcpulkovo.ru.cdcservice.domain.entity.postgresql.nsi.public_schema
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import rivcpulkovo.ru.cdcservice.domain.entity.mssql.MsSqlCity
 import java.time.LocalDateTime
 import javax.persistence.*
 
+@JsonIgnoreProperties("hibernateLazyInitializer")
 @Table(name = "cities")
 @Entity
 open class City {
@@ -12,12 +14,12 @@ open class City {
     @Column(name = "id", nullable = false)
     open var id: Int = 0
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "country_id", nullable = false, insertable = false, updatable = false)
-    open var country: Country? = null
+/*    @Column(name = "country_id", nullable = false)
+    open var countryId: Int = 0*/
 
-    @Column(name = "country_id", nullable = false)
-    open var countryId: Int = 0
+    @ManyToOne(optional = false) //fetch = FetchType.LAZY,
+    @JoinColumn(name = "country_id") //, nullable = false, insertable = false, updatable =false
+    open var country: Country? = null
 
     @Column(name = "inner_id", nullable = false)
     open var innerId: Int = 0
@@ -37,18 +39,18 @@ open class City {
     @Column(name = "start_date", nullable = false)
     open var startDate: LocalDateTime = LocalDateTime.now()
 
-    @Column(name = "end_date")
-    open var endDate: LocalDateTime? = null
+    @Column(name = "end_date", nullable = false)
+    open var endDate: LocalDateTime? = LocalDateTime.now().plusYears(30)
 
     @Column(name = "is_capital", nullable = false)
     open var isCapital: Boolean = false
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "time_zone_inner_id", nullable = false, insertable = false, updatable = false)
-    open var timeZoneInner: Language? = null
+    @ManyToOne(optional = false) //fetch = FetchType.LAZY,
+    @JoinColumn(name = "time_zone_inner_id") //, nullable = false, insertable = false, updatable =false
+    open var timeZoneName: TimeZoneName? = null
 
-    @Column(name = "time_zone_inner_id", nullable = false)
-    open var timeZoneInnerId: Int = 0
+/*    @Column(name = "time_zone_inner_id", nullable = false)
+    open var timeZoneNameId: Int = 0*/
 
     @Column(name = "creation_date", nullable = false)
     open var creationDate: LocalDateTime = LocalDateTime.now()
@@ -59,8 +61,8 @@ open class City {
     @Column(name = "editor_id", nullable = false)
     open var editorId: Int = 0
 
-    constructor(data: MsSqlCity, countryId: Int, timeZoneInnerId: Int, isCapital: Boolean) {
-        this.countryId = countryId
+    constructor(data: MsSqlCity, countryId: Int, timeZoneNameId: Int, isCapital: Boolean) {
+        this.country?.id = countryId
         this.innerId = data.id ?: 0
         this.iata = data.iata?: "нд"
         this.native = data.apC?: "нд"
@@ -68,7 +70,7 @@ open class City {
         this.fullName = data.nameAp?: "нд"
         this.startDate = LocalDateTime.now()
         this.isCapital = isCapital
-        this.timeZoneInnerId = timeZoneInnerId
+        this.timeZoneName?.id = timeZoneNameId
         this.creationDate = LocalDateTime.now()
         this.editorId = 0
 

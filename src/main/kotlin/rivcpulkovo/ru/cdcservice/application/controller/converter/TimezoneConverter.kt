@@ -1,4 +1,4 @@
-package rivcpulkovo.ru.cdcservice.application.controller
+package rivcpulkovo.ru.cdcservice.application.controller.converter
 
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
@@ -20,7 +20,8 @@ class TimezoneConverter(
     @GetMapping("{timeZone_id}")
     fun msSqlToPostgreById(@PathVariable timeZone_id: Int): TimeZone {
         val msTimezone = msTimeZoneService.getById(timeZone_id)
-        return TimeZone(msTimezone, (pgCountryService.getByAlpha2(msTimezone.cc).id))
+        val countryId = pgCountryService.getByAlpha2(msTimezone.cc).id
+        return TimeZone(msTimezone, countryId)
     }
 
     @GetMapping("{timeZone_id}/country")

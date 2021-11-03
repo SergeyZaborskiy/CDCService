@@ -15,4 +15,8 @@ class MsSqlCountryService(private val repository: MsSqlCountryRepository) {
     fun getById(id: String): MsSqlCountry {
         return repository.getById(id)
     }
+
+    fun existsByApC(apC: String): Boolean {
+        return repository.existsByApC(apC)
+    }
 }

@@ -6,4 +6,12 @@ import rivcpulkovo.ru.cdcservice.domain.entity.postgresql.nsi.public_schema.City
 
 @Repository
 interface CityRepository : JpaRepository<City, Int> {
+
+    fun existsByInnerId(innerId: Int): Boolean
+
+    fun getByInnerId(innerId: Int): City
+
+    fun getByCountryId(countryId: Int): List<City>
+
+    fun existsByCountryId(countryId: Int): Boolean
 }

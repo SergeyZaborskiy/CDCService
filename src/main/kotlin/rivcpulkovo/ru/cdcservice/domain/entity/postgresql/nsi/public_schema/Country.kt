@@ -1,9 +1,11 @@
 package rivcpulkovo.ru.cdcservice.domain.entity.postgresql.nsi.public_schema
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import rivcpulkovo.ru.cdcservice.domain.entity.mssql.MsSqlCountry
 import java.time.LocalDateTime
 import javax.persistence.*
 
+@JsonIgnoreProperties("hibernateLazyInitializer")
 @Table(name = "countries")
 @Entity
 open class Country {
@@ -33,20 +35,11 @@ open class Country {
     @Column(name = "editor_id", nullable = false)
     open var editorId: Int = 0
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "default_lang_id", nullable = false, insertable = false, updatable =false)
+    @ManyToOne(optional = false) //fetch = FetchType.LAZY,
+    @JoinColumn(name = "default_lang_id") //, nullable = false, insertable = false, updatable =false
     open var defaultLang: Language? = null
 
-    @Column(name = "default_lang_id")
-    open var defaultLangId: Int = 1
-
-/*    @OneToMany(mappedBy = "countries", fetch = FetchType.LAZY)
-    open var cities: MutableList<City>? = null
-
-    @OneToMany(mappedBy = "countries", fetch = FetchType.LAZY)
-    open var airport: MutableList<Airport>? = null*/
-
-    constructor(data: MsSqlCountry) {
+    constructor(data: MsSqlCountry, defaultLangId: Int) {
         this.alpha2 =data.id?: "нд"
         this.alpha3 = data.alpha3?: "нд"
         this.numСс = data.kc?: "нд"
@@ -54,6 +47,6 @@ open class Country {
         this.creationDate = LocalDateTime.now()
         this.correctionDate = data.dk?: LocalDateTime.now()
         this.editorId = 0
-        this.defaultLangId = 1
+        this.defaultLang?.id = defaultLangId
     }
 }

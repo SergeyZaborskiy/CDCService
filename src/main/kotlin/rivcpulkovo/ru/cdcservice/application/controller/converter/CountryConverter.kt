@@ -1,4 +1,4 @@
-package rivcpulkovo.ru.cdcservice.application.controller
+package rivcpulkovo.ru.cdcservice.application.controller.converter
 
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
@@ -14,7 +14,8 @@ class CountryConverter(private val msService: MsSqlCountryService, private val p
 
     @GetMapping("{country_id}")
     fun msSqlToPostgreById (@PathVariable country_id: String) : Country {
-        return Country(msService.getById(country_id))
+        val country = msService.getById(country_id)
+        return Country(msService.getById(country_id), 1)
     }
 
     @GetMapping("{airport_id}/save")

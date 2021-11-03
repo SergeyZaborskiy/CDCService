@@ -25,7 +25,6 @@ spring:
     hibernate:
       ddl-auto: none
 
-
 #============== spring actuator config ==========================
 management:
   endpoints:

@@ -1,4 +1,4 @@
-package rivcpulkovo.ru.cdcservice.application.controller
+package rivcpulkovo.ru.cdcservice.application.controller.converter
 
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable

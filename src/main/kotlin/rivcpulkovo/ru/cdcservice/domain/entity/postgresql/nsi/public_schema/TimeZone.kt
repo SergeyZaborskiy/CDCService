@@ -1,5 +1,6 @@
 package rivcpulkovo.ru.cdcservice.domain.entity.postgresql.nsi.public_schema
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import rivcpulkovo.ru.cdcservice.domain.entity.mssql.MsSqlTimezone
 import java.math.BigDecimal
 import java.time.LocalDateTime
@@ -7,6 +8,7 @@ import java.time.LocalTime
 import java.time.format.DateTimeFormatter
 import javax.persistence.*
 
+@JsonIgnoreProperties("hibernateLazyInitializer")
 @Table(name = "time_zones")
 @Entity
 open class TimeZone {
@@ -18,12 +20,12 @@ open class TimeZone {
     @Column(name = "inner_id", nullable = false)
     open var innerId: Int = 0
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "country_id", nullable = false, insertable = false, updatable = false)
-    open var country: Country? = null
+/*    @Column(name = "country_id", nullable = false)
+    open var countryId: Int = 0*/
 
-    @Column(name = "country_id", nullable = false)
-    open var countryId: Int = 0
+    @ManyToOne(optional = false) //fetch = FetchType.LAZY,
+    @JoinColumn(name = "country_id") //, nullable = false, insertable = false, updatable =false
+    open var country: Country? = null
 
     @Column(name = "code", nullable = false, length = 3)
     open var code: String = "нд"
@@ -61,7 +63,7 @@ open class TimeZone {
 
     constructor(data: MsSqlTimezone, countryId: Int?) {
         this.innerId = data.id
-        this.countryId = countryId?: 0
+        this.country?.id = countryId?: 0
         this.code = data.tz
         this.delta = data.standVar
         this.summerDelta = data.dstVar

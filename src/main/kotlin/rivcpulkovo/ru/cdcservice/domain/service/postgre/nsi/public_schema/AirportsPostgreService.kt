@@ -10,7 +10,7 @@ import rivcpulkovo.ru.cdcservice.domain.repository.postgresql.nsi.public_schema.
 @Transactional("ufdTransactionManager")
 class AirportsPostgreService(private val repository: AirportRepository) {
 
-    fun getAll(): List<Airport>{
+    fun getAll(): List<Airport> {
         return repository.findAll()
     }
 
@@ -18,25 +18,19 @@ class AirportsPostgreService(private val repository: AirportRepository) {
         return repository.getById(airport_id)
     }
 
-    fun saveFromMssqlById(airport: MsSqlAirport): String {
-        return if (repository.existsAirportByInnerId(airport.id)){
-            "Already have one"
-        } else {
-            val temp: Airport = Airport(airport)
-            repository.save(temp)
-            "Save done"
-        }
+    fun existsByInnerId(innerId: Int?): Boolean {
+        return repository.existsByInnerId(innerId)
     }
 
-    fun saveAllFromMssql(airports: List<MsSqlAirport>): String {
-        for (airport in airports) {
-            if (repository.existsAirportByInnerId(airport.id)) {
-                continue
-            } else {
-                val temp: Airport = Airport(airport)
-                repository.save(temp)
-            }
-        }
-        return "Done"
+    fun saveOrUpdate(airport: Airport) {
+        repository.save(airport)
+    }
+
+    fun findByCityName(cityId: Int): List<Airport> {
+        return repository.findByCityId(cityId)
+    }
+
+    fun findByCountryName(countryId: Int): List<Airport> {
+        return repository.findByCountryId(countryId)
     }
 }

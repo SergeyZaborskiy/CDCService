@@ -35,6 +35,7 @@
           <entity value="rivcpulkovo.ru.cdcservice.domain.entity.postgresql.nsi.public_schema.RouteType" />
           <entity value="rivcpulkovo.ru.cdcservice.domain.entity.postgresql.nsi.public_schema.SsrType" />
           <entity value="rivcpulkovo.ru.cdcservice.domain.entity.postgresql.nsi.public_schema.WaypointType" />
+          <entity value="rivcpulkovo.ru.cdcservice.domain.entity.postgresql.nsi.public_schema.TimeZoneName" />
         </entities>
       </persistence-unit>
     </persistence-units>
