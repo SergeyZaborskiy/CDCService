@@ -9,6 +9,8 @@ interface AirportRepository : JpaRepository<Airport, Int> {
 
     fun existsByInnerId (innerId: Int?) : Boolean
 
+    fun findByInnerId(innerId: Int?): Airport
+
     fun findByCityId(cityId: Int): List<Airport>
 
     fun findByCountryId(countryId: Int): List<Airport>

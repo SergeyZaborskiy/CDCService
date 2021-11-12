@@ -1,4 +1,4 @@
-package rivcpulkovo.ru.cdcservice.domain.entity.mssql
+package rivcpulkovo.ru.cdcservice.domain.entity.mssql.nsi
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import org.hibernate.annotations.Proxy

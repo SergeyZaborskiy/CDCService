@@ -6,4 +6,8 @@ import rivcpulkovo.ru.cdcservice.domain.entity.postgresql.nsi.public_schema.Airc
 
 @Repository
 interface AircraftTypeRepository : JpaRepository<AircraftType, Int> {
+
+    fun existsByNativeAndMd(native: String, md: String): Boolean
+
+    fun findByNative(native: String): AircraftType
 }

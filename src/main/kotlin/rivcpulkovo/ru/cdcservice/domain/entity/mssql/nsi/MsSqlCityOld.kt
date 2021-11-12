@@ -1,4 +1,4 @@
-package rivcpulkovo.ru.cdcservice.domain.entity.mssql
+package rivcpulkovo.ru.cdcservice.domain.entity.mssql.nsi
 
 import java.time.LocalDateTime
 import javax.persistence.Column

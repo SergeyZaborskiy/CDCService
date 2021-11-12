@@ -1,4 +1,4 @@
-package rivcpulkovo.ru.cdcservice.domain.entity.mssql
+package rivcpulkovo.ru.cdcservice.domain.entity.mssql.nsi
 
 import org.hibernate.Hibernate
 import java.io.Serializable

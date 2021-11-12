@@ -2,12 +2,10 @@ package rivcpulkovo.ru.cdcservice.domain.service.postgre.nsi.public_schema
 
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
-import rivcpulkovo.ru.cdcservice.domain.entity.mssql.MsSqlAirport
 import rivcpulkovo.ru.cdcservice.domain.entity.postgresql.nsi.public_schema.Airport
 import rivcpulkovo.ru.cdcservice.domain.repository.postgresql.nsi.public_schema.AirportRepository
 
 @Service
-@Transactional("ufdTransactionManager")
 class AirportsPostgreService(private val repository: AirportRepository) {
 
     fun getAll(): List<Airport> {
@@ -22,6 +20,10 @@ class AirportsPostgreService(private val repository: AirportRepository) {
         return repository.existsByInnerId(innerId)
     }
 
+    fun findByInnerId(innerId: Int?): Airport {
+        return repository.findByInnerId(innerId)
+    }
+
     fun saveOrUpdate(airport: Airport) {
         repository.save(airport)
     }
@@ -33,4 +35,5 @@ class AirportsPostgreService(private val repository: AirportRepository) {
     fun findByCountryName(countryId: Int): List<Airport> {
         return repository.findByCountryId(countryId)
     }
+
 }

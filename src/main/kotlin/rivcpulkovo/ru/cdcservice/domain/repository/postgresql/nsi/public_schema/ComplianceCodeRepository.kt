@@ -6,4 +6,6 @@ import rivcpulkovo.ru.cdcservice.domain.entity.postgresql.nsi.public_schema.Comp
 
 @Repository
 interface ComplianceCodeRepository : JpaRepository<ComplianceCode, Int> {
+
+    fun getByCodeEn(codeEn: String): ComplianceCode
 }

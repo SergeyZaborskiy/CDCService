@@ -38,6 +38,16 @@
           <entity value="rivcpulkovo.ru.cdcservice.domain.entity.postgresql.nsi.public_schema.TimeZoneName" />
         </entities>
       </persistence-unit>
+      <persistence-unit name="ufdPgPU">
+        <entities>
+          <entity value="rivcpulkovo.ru.cdcservice.domain.entity.postgresql.ufd.public.FlightPeriod" />
+        </entities>
+      </persistence-unit>
+      <persistence-unit name="rdsMsPU">
+        <entities>
+          <entity value="rivcpulkovo.ru.cdcservice.domain.entity.mssql.rds.MsSqlFlightPeriodsEntity" />
+        </entities>
+      </persistence-unit>
     </persistence-units>
   </component>
 </project>

@@ -1,7 +1,7 @@
 package rivcpulkovo.ru.cdcservice.domain.entity.postgresql.nsi.public_schema
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
-import rivcpulkovo.ru.cdcservice.domain.entity.mssql.MsSqlCity
+import rivcpulkovo.ru.cdcservice.domain.entity.mssql.nsi.MsSqlCity
 import java.time.LocalDateTime
 import javax.persistence.*
 

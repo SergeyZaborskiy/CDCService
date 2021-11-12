@@ -1,4 +1,4 @@
-package rivcpulkovo.ru.cdcservice.domain.entity.mssql
+package rivcpulkovo.ru.cdcservice.domain.entity.mssql.nsi
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import org.hibernate.annotations.Proxy
@@ -16,11 +16,17 @@ import javax.persistence.*
     ]
 )
 @Entity
-@JsonIgnoreProperties(ignoreUnknown = false)
-@Proxy(lazy = false)
 open class MsSqlAirctaftType {
-    @EmbeddedId
-    open var id: MsSqlAirctaftTypeId? = null
+
+/*    @EmbeddedId
+    open var id: MsSqlAirctaftTypeId? = null*/
+
+    @Id
+    @Column(name = "TS", nullable = false, length = 3)
+    open var ts: String = "  "
+
+    @Column(name = "MD", nullable = false, length = 1)
+    open var md: String = " "
 
     @Column(name = "TS_NO")
     open var tsNo: Int? = null

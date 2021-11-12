@@ -1,7 +1,7 @@
 package rivcpulkovo.ru.cdcservice.domain.entity.postgresql.nsi.public_schema
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
-import rivcpulkovo.ru.cdcservice.domain.entity.mssql.MsSqlTimezone
+import rivcpulkovo.ru.cdcservice.domain.entity.mssql.nsi.MsSqlTimezone
 import java.math.BigDecimal
 import java.time.LocalDateTime
 import java.time.LocalTime
@@ -61,9 +61,8 @@ open class TimeZone {
 /*    @OneToMany(mappedBy = "time_zones", fetch = FetchType.LAZY)
     open var airport: MutableList<Airport>? = null*/
 
-    constructor(data: MsSqlTimezone, countryId: Int?) {
+    constructor(data: MsSqlTimezone) {
         this.innerId = data.id
-        this.country?.id = countryId?: 0
         this.code = data.tz
         this.delta = data.standVar
         this.summerDelta = data.dstVar

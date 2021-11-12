@@ -2,11 +2,10 @@ package rivcpulkovo.ru.cdcservice.domain.service.mssql
 
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
-import rivcpulkovo.ru.cdcservice.domain.entity.mssql.MsSqlAirport
-import rivcpulkovo.ru.cdcservice.domain.repository.mssql.MsSqlAirportRepository
+import rivcpulkovo.ru.cdcservice.domain.entity.mssql.nsi.MsSqlAirport
+import rivcpulkovo.ru.cdcservice.domain.repository.mssql.nsi.MsSqlAirportRepository
 
 @Service
-@Transactional("nsiTransactionManager")
 class MsSqlAirportService(private val repository: MsSqlAirportRepository) {
 
     fun getAll(): List<MsSqlAirport> {

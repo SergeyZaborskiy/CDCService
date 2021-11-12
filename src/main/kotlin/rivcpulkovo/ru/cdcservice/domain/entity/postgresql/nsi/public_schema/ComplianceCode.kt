@@ -1,6 +1,6 @@
 package rivcpulkovo.ru.cdcservice.domain.entity.postgresql.nsi.public_schema
 
-import rivcpulkovo.ru.cdcservice.domain.entity.mssql.MsSqlComplianceCodesTraffic
+import rivcpulkovo.ru.cdcservice.domain.entity.mssql.nsi.MsSqlComplianceCodesTraffic
 import java.time.LocalDateTime
 import javax.persistence.*
 
@@ -33,7 +33,7 @@ open class ComplianceCode {
     @Column(name = "correction_date")
     open var correctionDate: LocalDateTime? = null
 
-    constructor(data:MsSqlComplianceCodesTraffic) {
+    constructor(data: MsSqlComplianceCodesTraffic) {
         this.code = data.ru
         this.codeEn = data.en
         this.name = data.note?.substringBefore(" ")

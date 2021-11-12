@@ -1,10 +1,7 @@
 package rivcpulkovo.ru.cdcservice.domain.service.postgre.nsi.public_schema
 
 import org.springframework.stereotype.Service
-import rivcpulkovo.ru.cdcservice.domain.entity.mssql.MsSqlCity
-import rivcpulkovo.ru.cdcservice.domain.entity.mssql.MsSqlCountry
 import rivcpulkovo.ru.cdcservice.domain.entity.postgresql.nsi.public_schema.City
-import rivcpulkovo.ru.cdcservice.domain.entity.postgresql.nsi.public_schema.Country
 import rivcpulkovo.ru.cdcservice.domain.repository.postgresql.nsi.public_schema.CityRepository
 
 @Service

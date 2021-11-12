@@ -19,9 +19,12 @@ class TimezoneConverter(
 ) {
     @GetMapping("{timeZone_id}")
     fun msSqlToPostgreById(@PathVariable timeZone_id: Int): TimeZone {
-        val msTimezone = msTimeZoneService.getById(timeZone_id)
-        val countryId = pgCountryService.getByAlpha2(msTimezone.cc).id
-        return TimeZone(msTimezone, countryId)
+        val msTimeZone = msTimeZoneService.getById(timeZone_id)
+        val pgCountry = pgCountryService.getByAlpha2(msTimeZone.cc)
+        val pgTimeZone = TimeZone(msTimeZone)
+        pgTimeZone.country = pgCountry
+        pgTimeZoneService.saveOrUpdate(pgTimeZone)
+        return pgTimeZone
     }
 
     @GetMapping("{timeZone_id}/country")
@@ -33,10 +36,11 @@ class TimezoneConverter(
     @GetMapping("{timeZone_id}/save")
     fun msSqlSaveToPostgreById(@PathVariable timeZone_id: Int): String {
         val msTimeZone = msTimeZoneService.getById(timeZone_id)
-        return pgTimeZoneService.saveFromMssqlById(
-            msTimeZone,
-            pgCountryService.getByAlpha2(msTimeZone.cc).id
-        )
+        val pgCountry = pgCountryService.getByAlpha2(msTimeZone.cc)
+        val pgTimeZone = TimeZone(msTimeZone)
+        pgTimeZone.country = pgCountry
+        pgTimeZoneService.saveOrUpdate(pgTimeZone)
+        return "Done"
     }
 
     @GetMapping("/saveAll")
@@ -46,12 +50,12 @@ class TimezoneConverter(
             if (pgTimeZoneService.existsByInnerId(msTimeZone.id)) {
                 continue
             } else {
-                val countryId = pgCountryService.getByAlpha2(msTimeZone.cc.toString()).id ?: 0
-                val pgTimeZone = TimeZone(msTimeZone, countryId)
+                val pgCountry = pgCountryService.getByAlpha2(msTimeZone.cc)
+                val pgTimeZone = TimeZone(msTimeZone)
+                pgTimeZone.country = pgCountry
                 pgTimeZoneService.saveOrUpdate(pgTimeZone)
             }
         }
-
         return "Done"
     }
 }

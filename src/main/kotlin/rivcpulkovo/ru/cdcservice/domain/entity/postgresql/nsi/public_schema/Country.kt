@@ -1,7 +1,7 @@
 package rivcpulkovo.ru.cdcservice.domain.entity.postgresql.nsi.public_schema
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
-import rivcpulkovo.ru.cdcservice.domain.entity.mssql.MsSqlCountry
+import rivcpulkovo.ru.cdcservice.domain.entity.mssql.nsi.MsSqlCountry
 import java.time.LocalDateTime
 import javax.persistence.*
 
@@ -39,7 +39,7 @@ open class Country {
     @JoinColumn(name = "default_lang_id") //, nullable = false, insertable = false, updatable =false
     open var defaultLang: Language? = null
 
-    constructor(data: MsSqlCountry, defaultLangId: Int) {
+    constructor(data: MsSqlCountry) {
         this.alpha2 =data.id?: "нд"
         this.alpha3 = data.alpha3?: "нд"
         this.numСс = data.kc?: "нд"
@@ -47,6 +47,5 @@ open class Country {
         this.creationDate = LocalDateTime.now()
         this.correctionDate = data.dk?: LocalDateTime.now()
         this.editorId = 0
-        this.defaultLang?.id = defaultLangId
     }
 }

@@ -1,8 +1,8 @@
 package rivcpulkovo.ru.cdcservice.domain.service.mssql
 
 import org.springframework.stereotype.Service
-import rivcpulkovo.ru.cdcservice.domain.entity.mssql.MsSqlCityOld
-import rivcpulkovo.ru.cdcservice.domain.repository.mssql.MsSqlCityOldRepository
+import rivcpulkovo.ru.cdcservice.domain.entity.mssql.nsi.MsSqlCityOld
+import rivcpulkovo.ru.cdcservice.domain.repository.mssql.nsi.MsSqlCityOldRepository
 
 @Service
 class MsSqlCityOldService(private val repository: MsSqlCityOldRepository) {

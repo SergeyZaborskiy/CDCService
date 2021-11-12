@@ -1,6 +1,6 @@
 package rivcpulkovo.ru.cdcservice.domain.entity.postgresql.nsi.public_schema
 
-import rivcpulkovo.ru.cdcservice.domain.entity.mssql.MsSqlAirport
+import rivcpulkovo.ru.cdcservice.domain.entity.mssql.nsi.MsSqlAirport
 import java.math.BigDecimal
 import java.time.LocalDateTime
 import javax.persistence.*

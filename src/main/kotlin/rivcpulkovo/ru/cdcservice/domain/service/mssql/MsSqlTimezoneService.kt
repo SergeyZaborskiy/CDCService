@@ -1,8 +1,8 @@
 package rivcpulkovo.ru.cdcservice.domain.service.mssql
 
 import org.springframework.stereotype.Service
-import rivcpulkovo.ru.cdcservice.domain.entity.mssql.MsSqlTimezone
-import rivcpulkovo.ru.cdcservice.domain.repository.mssql.MsSqlTimezoneRepository
+import rivcpulkovo.ru.cdcservice.domain.entity.mssql.nsi.MsSqlTimezone
+import rivcpulkovo.ru.cdcservice.domain.repository.mssql.nsi.MsSqlTimezoneRepository
 
 @Service
 class MsSqlTimezoneService(private val repository: MsSqlTimezoneRepository) {

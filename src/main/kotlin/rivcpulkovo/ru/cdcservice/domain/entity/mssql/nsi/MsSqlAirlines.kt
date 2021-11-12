@@ -1,4 +1,4 @@
-package rivcpulkovo.ru.cdcservice.domain.entity.mssql
+package rivcpulkovo.ru.cdcservice.domain.entity.mssql.nsi
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import org.hibernate.annotations.Proxy
@@ -27,85 +27,85 @@ open class MsSqlAirlines {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
-    open var id: Long? = null
+    open var id: Int = 0
 
     @Column(name = "id_OK", nullable = false)
-    open var idOk: Long? = null
+    open var idOk: Int = 0
 
     @Column(name = "OK", nullable = false, length = 4)
-    open var ok: String? = null
+    open var ok: String = "  "
 
     @Column(name = "UG", nullable = false, length = 2)
-    open var ug: String? = null
+    open var ug: String = "  "
 
     @Column(name = "IATA", nullable = false, length = 2)
-    open var iata: String? = null
+    open var iata: String = "  "
 
     @Column(name = "KC", nullable = false, length = 3)
-    open var kc: String? = null
+    open var kc: String = "  "
 
     @Column(name = "IK", nullable = false, length = 3)
-    open var ik: String? = null
+    open var ik: String = "  "
 
     @Column(name = "IK_R", nullable = false, length = 3)
-    open var ikR: String? = null
+    open var ikR: String = "  "
 
     @Column(name = "nm", nullable = false, length = 200)
-    open var nm: String? = null
+    open var nm: String = "  "
 
     @Column(name = "NM1", nullable = false, length = 25)
-    open var nm1: String? = null
+    open var nm1: String = "  "
 
     @Column(name = "nl", nullable = false, length = 200)
-    open var nl: String? = null
+    open var nl: String = "  "
 
     @Column(name = "NL1", nullable = false, length = 25)
-    open var nl1: String? = null
+    open var nl1: String = "  "
 
     @Column(name = "ID_CITY", nullable = false)
-    open var idCity: Int? = null
+    open var idCity: Int = 0
 
     @Column(name = "cc", nullable = false, length = 2)
-    open var cc: String? = null
+    open var cc: String = "  "
 
     @Column(name = "DV", nullable = false)
-    open var dv: LocalDateTime? = null
+    open var dv: LocalDateTime = LocalDateTime.now()
 
     @Column(name = "do")
-    open var _do: LocalDateTime? = null
+    open var dO: LocalDateTime? = null
 
     @Column(name = "ds", nullable = false)
-    open var ds: LocalDateTime? = null
+    open var ds: LocalDateTime = LocalDateTime.now()
 
     @Column(name = "dk", nullable = false)
-    open var dk: LocalDateTime? = null
+    open var dk: LocalDateTime = LocalDateTime.now()
 
     @Column(name = "REM", nullable = false, length = 300)
-    open var rem: String? = null
+    open var rem: String = "  "
 
     @Column(name = "AFTN", nullable = false, length = 8)
-    open var aftn: String? = null
+    open var aftn: String = "  "
 
     @Column(name = "SITA", nullable = false, length = 7)
-    open var sita: String? = null
+    open var sita: String = "  "
 
     @Column(name = "TEL", nullable = false, length = 15)
-    open var tel: String? = null
+    open var tel: String = "  "
 
     @Column(name = "FAX", nullable = false, length = 15)
-    open var fax: String? = null
+    open var fax: String = "  "
 
     @Column(name = "ADR", nullable = false, length = 100)
-    open var adr: String? = null
+    open var adr: String = "  "
 
     @Column(name = "RCP", nullable = false, length = 3)
-    open var rcp: String? = null
+    open var rcp: String = "  "
 
     @Column(name = "Name_TKP", nullable = false, length = 24)
-    open var nameTkp: String? = null
+    open var nameTkp: String = "  "
 
     @Column(name = "cop", nullable = false)
-    open var cop: Int? = null
+    open var cop: Int = 0
 
     @Column(name = "FakeIATA")
     open var fakeIATA: Boolean? = null

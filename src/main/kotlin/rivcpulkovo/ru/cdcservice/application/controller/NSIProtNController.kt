@@ -4,7 +4,7 @@ import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
-import rivcpulkovo.ru.cdcservice.domain.entity.mssql.MsSqlAirport
+import rivcpulkovo.ru.cdcservice.domain.entity.mssql.nsi.MsSqlAirport
 import rivcpulkovo.ru.cdcservice.domain.service.mssql.MsSqlAirportService
 
 @RestController

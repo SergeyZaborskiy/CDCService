@@ -49,10 +49,10 @@ management:
 
 
 #============== spring source ms sql NSI datasource ==========================
-nsi:
+msnsi:
   spring:
     datasource:
-      pool-name: nsiDataSource
+      pool-name: nsiMsDataSource
       username: kobra_main
       password: Ggv123
       url: jdbc:sqlserver://srvr153;databaseName=NSI
@@ -62,8 +62,22 @@ nsi:
         dialect: org.hibernate.dialect.SQLServerDialect
         ddl-auto: none
 
+#============== spring source ms sql NSI datasource ==========================
+msrds:
+  spring:
+    datasource:
+      pool-name: rdsMsDataSource
+      username: kobra_main
+      password: Ggv123
+      url: jdbc:sqlserver://srvr153;databaseName=RDS
+      jdbc-url: jdbc:sqlserver://srvr153;databaseName=RDS
+      driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+      properties:
+        dialect: org.hibernate.dialect.SQLServerDialect
+        ddl-auto: none
+
 #============== spring source postgre UFD datasource ==========================
-postgre-nsi:
+postgrensi:
   spring:
     datasource:
       pool-name: ufdDataSource
@@ -74,5 +88,20 @@ postgre-nsi:
       url: jdbc:postgresql://localhost:5432/nsi
       #url: jdbc:postgresql://pg2.sweb.ru/akraev1982
       jdbc-url: jdbc:postgresql://localhost:5432/nsi
+      #jdbcUrl: jdbc:postgresql://pg2.sweb.ru/akraev1982
+      driver-class-name: org.postgresql.Driver
+
+#============== spring source postgre UFD datasource ==========================
+postgreufd:
+  spring:
+    datasource:
+      pool-name: ufdPgDataSource
+      username: sa
+      #username: akraev1982
+      password: Gf07031990
+      #password: Kraev12345678
+      url: jdbc:postgresql://localhost:5432/ufd
+      #url: jdbc:postgresql://pg2.sweb.ru/akraev1982
+      jdbc-url: jdbc:postgresql://localhost:5432/ufd
       #jdbcUrl: jdbc:postgresql://pg2.sweb.ru/akraev1982
       driver-class-name: org.postgresql.Driver

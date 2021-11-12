@@ -1,7 +1,7 @@
 package rivcpulkovo.ru.cdcservice.domain.service.postgre.nsi.public_schema
 
 import org.springframework.stereotype.Service
-import rivcpulkovo.ru.cdcservice.domain.entity.mssql.MsSqlComplianceCodesTraffic
+import rivcpulkovo.ru.cdcservice.domain.entity.mssql.nsi.MsSqlComplianceCodesTraffic
 import rivcpulkovo.ru.cdcservice.domain.entity.postgresql.nsi.public_schema.ComplianceCode
 import rivcpulkovo.ru.cdcservice.domain.repository.postgresql.nsi.public_schema.ComplianceCodeRepository
 
@@ -14,6 +14,10 @@ class ComplianceCodeService(private val repository: ComplianceCodeRepository) {
 
     fun getById(id: Int): ComplianceCode {
         return repository.getById(id)
+    }
+
+    fun getByCodeEn(codeEn: String): ComplianceCode {
+        return repository.getByCodeEn(codeEn)
     }
 
     fun saveOrUpdate(data: ComplianceCode) {

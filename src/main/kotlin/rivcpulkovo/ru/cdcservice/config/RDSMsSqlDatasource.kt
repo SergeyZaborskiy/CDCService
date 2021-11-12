@@ -13,25 +13,26 @@ import org.springframework.orm.jpa.JpaTransactionManager
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean
 import org.springframework.transaction.PlatformTransactionManager
 import org.springframework.transaction.annotation.EnableTransactionManagement
-import rivcpulkovo.ru.cdcservice.domain.entity.mssql.nsi.*
+import rivcpulkovo.ru.cdcservice.domain.entity.mssql.rds.MsSqlFlightPeriodsEntity
 import javax.persistence.EntityManagerFactory
+
 
 @Configuration
 @EnableTransactionManagement
 @EnableJpaRepositories(
-    basePackages = ["rivcpulkovo.ru.cdcservice.domain.repository.mssql.nsi"],
-    entityManagerFactoryRef = "nsiMsEntityManager", transactionManagerRef = "nsiMsTransactionManager"
+    basePackages = ["rivcpulkovo.ru.cdcservice.domain.repository.mssql.rds"],
+    entityManagerFactoryRef = "rdsMsEntityManager", transactionManagerRef = "rdsMsTransactionManager"
 )
-class NSIMsSqlDatasource {
+class RDSMsSqlDatasource {
 
     @Bean
-    @ConfigurationProperties(prefix = "msnsi.spring.datasource")
-    fun nsiMsHikariDataSource(): HikariDataSource {
+    @ConfigurationProperties(prefix = "msrds.spring.datasource")
+    fun rdsMsHikariDataSource(): HikariDataSource {
         return DataSourceBuilder.create().type(HikariDataSource::class.java).build()
     }
 
-    @Bean(name = ["nsiMsEntityManager"])
-    fun nsiMsEntityManagerFactory(builder: EntityManagerFactoryBuilder): LocalContainerEntityManagerFactoryBean {
+    @Bean(name = ["rdsMsEntityManager"])
+    fun rdsMsEntityManagerFactory(builder: EntityManagerFactoryBuilder): LocalContainerEntityManagerFactoryBean {
 
         val hibernateProps: Map<String, String> = mapOf(
             "hibernate.dialect" to "org.hibernate.dialect.SQLServerDialect",
@@ -39,23 +40,16 @@ class NSIMsSqlDatasource {
         )
 
         return builder
-            .dataSource(nsiMsHikariDataSource())
+            .dataSource(rdsMsHikariDataSource())
             .properties(hibernateProps)
-            .packages(MsSqlAirport::class.java)
-            .packages(MsSqlAirctaftType::class.java)
-            .packages(MsSqlAirctaftTypeId::class.java)
-            .packages(MsSqlAirlines::class.java)
-            .packages(MsSqlAirport::class.java)
-            .packages(MsSqlCity::class.java)
-            .packages(MsSqlCountry::class.java)
-            .packages(MsSqlTimezone::class.java)
-            .persistenceUnit("nsiMsPU")
+            .packages(MsSqlFlightPeriodsEntity::class.java)
+            .persistenceUnit("rdsMsPU")
             .build()
     }
 
-    @Bean(name = ["nsiMsTransactionManager"])
+    @Bean(name = ["rdsMsTransactionManager"])
     @Primary
-    fun nsiMsTransactionManager(@Qualifier("nsiMsEntityManager") entityManagerFactory: EntityManagerFactory): PlatformTransactionManager {
+    fun rdsMsTransactionManager(@Qualifier("rdsMsEntityManager") entityManagerFactory: EntityManagerFactory): PlatformTransactionManager {
         return JpaTransactionManager(entityManagerFactory)
     }
 }

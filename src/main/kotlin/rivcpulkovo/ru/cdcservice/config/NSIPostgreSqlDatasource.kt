@@ -20,15 +20,15 @@ import javax.persistence.EntityManagerFactory
 @Configuration
 @EnableTransactionManagement
 @EnableJpaRepositories(
-    basePackages = ["rivcpulkovo.ru.cdcservice.domain.repository.postgresql"],
-    entityManagerFactoryRef = "ufdEntityManager", transactionManagerRef = "ufdTransactionManager"
+    basePackages = ["rivcpulkovo.ru.cdcservice.domain.repository.postgresql.nsi"],
+    entityManagerFactoryRef = "nsiPgEntityManager", transactionManagerRef = "nsiPgTransactionManager"
 )
 class NSIPostgreSqlDatasource() {
 
     @Bean
     @Primary
-    @ConfigurationProperties(prefix = "postgre-nsi.spring.datasource")
-    fun ufdHikariDataSource(): HikariDataSource {
+    @ConfigurationProperties(prefix = "postgrensi.spring.datasource")
+    fun nsiPgHikariDataSource(): HikariDataSource {
         return DataSourceBuilder
             .create()
             .type(HikariDataSource::class.java)
@@ -36,9 +36,9 @@ class NSIPostgreSqlDatasource() {
     }
 
 
-    @Bean(name = ["ufdEntityManager"])
+    @Bean(name = ["nsiPgEntityManager"])
     @Primary
-    fun ufdEntityManagerFactory(builder: EntityManagerFactoryBuilder): LocalContainerEntityManagerFactoryBean {
+    fun nsiPgEntityManagerFactory(builder: EntityManagerFactoryBuilder): LocalContainerEntityManagerFactoryBean {
 
         val hibernateProps: Map<String, String> = mapOf(
             "hibernate.dialect" to "org.hibernate.dialect.PostgreSQL82Dialect",
@@ -47,7 +47,7 @@ class NSIPostgreSqlDatasource() {
 
 
         return builder
-            .dataSource(ufdHikariDataSource())
+            .dataSource(nsiPgHikariDataSource())
             .properties(hibernateProps)
             .packages(AircraftType::class.java)
             .packages(Airline::class.java)
@@ -67,13 +67,13 @@ class NSIPostgreSqlDatasource() {
             .packages(SsrType::class.java)
             .packages(TimeZone::class.java)
             .packages(WaypointType::class.java)
-            .persistenceUnit("ufdPU")
+            .persistenceUnit("nsiPgPU")
             .build()
     }
 
-    @Bean(name = ["ufdTransactionManager"])
+    @Bean(name = ["nsiPgTransactionManager"])
     @Primary
-    fun ufdTransactionManager(@Qualifier("ufdEntityManager") entityManagerFactory: EntityManagerFactory): PlatformTransactionManager {
+    fun nsiPgTransactionManager(@Qualifier("nsiPgEntityManager") entityManagerFactory: EntityManagerFactory): PlatformTransactionManager {
         return JpaTransactionManager(entityManagerFactory)
     }
 
